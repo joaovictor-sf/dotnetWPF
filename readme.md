@@ -14,3 +14,31 @@ O projeto WPF é organizado em várias pastas e arquivos, cada um com uma funç�
 
 ## O que é XAML
 XAML (Extensible Application Markup Language) é uma linguagem de marcação usada para definir a interface do usuário em aplicações WPF. Ele permite que os desenvolvedores descrevam a aparência e o comportamento dos controles de forma declarativa, separando a lógica de negócios da apresentação. O XAML é semelhante ao HTML, mas é projetado especificamente para criar interfaces de usuário ricas e interativas em aplicações desktop.
+
+## Apreendendo
+### Criando um novo projeto WPF
+1. Abra o Visual Studio e clique em "Criar um novo projeto".
+2. Selecione "Aplicativo WPF (.NET Core)" ou "Aplicativo WPF (.NET Framework)" e clique em "Avançar".
+3. Dê um nome ao seu projeto e escolha um local para salvá-lo. Clique em "Criar".
+4. O Visual Studio criará um novo projeto WPF com a estrutura básica de arquivos e pastas.
+
+### Hello World
+<img src="images/HelloWorld.png" alt="Hello World" width="400"/>
+
+Há duas maneiras de criar e modificar um projeto WPF: Você pode ultilizar a ToolBox do Visual Studio ou pode escrever o código manualmente. A escolha é por preferencia pessoal, muito provavelmente você irá utilizar as duas maneiras em algum momento.
+Mesmo que você utilize a ToolBox, você provavelmente terá que modificar o código manualmente em algum momento, então é bom ter uma noção de como funciona.
+
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTutorial"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock Text="Hello World" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>
+```
