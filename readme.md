@@ -42,3 +42,30 @@ Mesmo que você utilize a ToolBox, você provavelmente terá que modificar o có
     </Grid>
 </Window>
 ```
+
+### Backend
+Para adicionar lógica ao seu projeto, você pode usar o arquivo `MainWindow.xaml.cs`. Este arquivo contém a lógica de código por trás da janela principal. Você pode adicionar métodos, manipuladores de eventos e outras funcionalidades aqui.
+
+<img src="images/Run.png" alt="Backend" width="400"/>
+<img src="images/!Run.png" alt="Debug" width="400"/>
+
+*xaml*
+```xaml
+<Grid>
+    <TextBlock x:Name="tbHello" Text="Hello World!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Button x:Name="btnRun" Content="Run" Width="100" Height="50" FontSize="20" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Center" Click="btnRun_Click"/>
+</Grid>
+```
+
+*C#*
+```csharp
+private void btnRun_Click(object sender, RoutedEventArgs e) {
+        if (isRunning) {
+            tbHello.Text = "Hello World!";
+        } else {
+            tbHello.Text = "Goodbye World!";
+        }
+        isRunning = !isRunning;
+}
+```
+
