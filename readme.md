@@ -69,3 +69,61 @@ private void btnRun_Click(object sender, RoutedEventArgs e) {
 }
 ```
 
+### Grids
+O Grid é um dos contêineres mais comuns usados em WPF. Ele permite que você organize os controles em linhas e colunas, facilitando o layout da interface do usuário. Você pode definir a quantidade de linhas e colunas que deseja usar e, em seguida, adicionar controles a essas células.
+```xaml
+<Grid>
+    <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Fill="Red" Margin="10"/>
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="Green" Margin="10"/>
+        <Rectangle Grid.Row="2" Grid.Column="0" Fill="Blue" Margin="10"/>
+</Grid>
+```
+
+img src="images/Grid.png" alt="Grid" width="400"/>
+
+#### Linhas e Colunas
+Você pode definir linhas e colunas no Grid usando as propriedades `RowDefinitions` e `ColumnDefinitions`. Cada linha e coluna pode ter uma altura ou largura fixa, automática ou proporcional. Você pode usar a propriedade `Height` ou `Width` para definir o tamanho de cada linha ou coluna.
+```xaml
+<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        
+        <!--Menu Bar-->
+        <Rectangle Grid.Row="0" Fill="Red"/>
+
+        <!--Content Pane-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".2*"/><!--20%-->
+                <ColumnDefinition Width=".6*"/>
+                <!--Pode ser .6* ou 60*-->
+                <ColumnDefinition Width=".2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Column="0" Fill="Green"/>
+            <Rectangle Grid.Column="1" Fill="Yellow"/>
+            <Rectangle Grid.Column="2" Fill="Purple"/>
+
+        </Grid>
+
+        <!--Footer-->
+        <Rectangle Grid.Row="2" Fill="Blue"/>
+</Grid>
+```
+
+As "* " e "Auto" são usados para definir o tamanho proporcional e automático, respectivamente. O "*" significa que a linha ou coluna ocupará o espaço restante disponível na janela. O "Auto" significa que a linha ou coluna terá o tamanho necessário para acomodar seu conteúdo."
+
+<img src="images/Grid2.png" alt="Row" width="400"/>>

@@ -9,13 +9,4 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-
-    private void btnRun_Click(object sender, RoutedEventArgs e) {
-        if (isRunning) {
-            tbHello.Text = "Hello World!";
-        } else {
-            tbHello.Text = "Goodbye World!";
-        }
-        isRunning = !isRunning;
-    }
 }

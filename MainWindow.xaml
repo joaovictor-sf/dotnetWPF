@@ -7,7 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock x:Name="tbHello" Text="Hello World!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button x:Name="btnRun" Content="Run" Width="100" Height="50" FontSize="20" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Center" Click="btnRun_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        
+        <!--Menu Bar-->
+        <Rectangle Grid.Row="0" Fill="Red"/>
+
+        <!--Content Pane-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".2*"/><!--20%-->
+                <ColumnDefinition Width=".6*"/>
+                <!--Pode ser .6* ou 60*-->
+                <ColumnDefinition Width=".2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Column="0" Fill="Green"/>
+            <Rectangle Grid.Column="1" Fill="Yellow"/>
+            <Rectangle Grid.Column="2" Fill="Purple"/>
+
+        </Grid>
+
+        <!--Footer-->
+        <Rectangle Grid.Row="2" Fill="Blue"/>
+
     </Grid>
 </Window>
