@@ -127,3 +127,70 @@ Você pode definir linhas e colunas no Grid usando as propriedades `RowDefinitio
 As "* " e "Auto" são usados para definir o tamanho proporcional e automático, respectivamente. O "*" significa que a linha ou coluna ocupará o espaço restante disponível na janela. O "Auto" significa que a linha ou coluna terá o tamanho necessário para acomodar seu conteúdo."
 
 <img src="images/Grid2.png" alt="Row" width="400"/>>
+
+### UserControls
+Os UserControls são uma maneira de criar componentes reutilizáveis em WPF. Eles permitem que você agrupe controles e lógica em um único controle que pode ser usado em várias partes da sua aplicação. Isso ajuda a manter o código organizado e facilita a manutenção.
+
+Para criar um UserControl, clique com o botão direito do mouse na pasta do projeto e selecione "Adicionar" > "Novo Item". Escolha "User Control (WPF)" e dê um nome ao seu controle. O Visual Studio criará dois arquivos: um arquivo XAML para a interface do usuário e um arquivo C# para a lógica de código por trás do controle.
+
+```xaml
+<UserControl x:Class="WPFTutorial.View.UserControls.MenuBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFTutorial.View.UserControls"
+             mc:Ignorable="d" 
+             Height="70" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="File" FontSize="16">
+                <MenuItem Header="Exit" FontSize="16"/>
+            </MenuItem>
+            <MenuItem Header="Edit" FontSize="16"/>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Width="50" Margin="5"/>
+            <TextBox Width="150" Grid.Column="1" Margin="5"/>
+        </Grid>
+    </Grid>
+</UserControl>
+```
+
+Para usar o UserControl em sua aplicação, você pode copiar o xmlns:local, que é o namespace do UserControl, e colar no arquivo XAML onde você deseja usar o controle. Em seguida, mude o nome de local para o nome do userControl.
+Depois basta colocar a tag do UserControl no local desejado.
+
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTutorial"
+        xmlns:userControls="clr-namespace:WPFTutorial.View.UserControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".2*"/>
+            <RowDefinition Height=".7*"/>
+            <RowDefinition Height=".1*"/>
+        </Grid.RowDefinitions>
+
+        <userControls:MenuBar/>
+    </Grid>
+</Window>
+```
+
+<img src="images/UserControls.png" alt="UserControl" width="400"/>
