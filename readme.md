@@ -229,3 +229,28 @@ private void btnFire_Click(object sender, RoutedEventArgs e) {
 }
 ```
 <img src="images/MessageBox3.png" alt="MessageBox3" width="200"/>
+
+### OpenFile Dialog
+O OpenFileDialog é uma janela de diálogo que permite ao usuário selecionar um arquivo do sistema de arquivos. Ele é útil para abrir arquivos, como documentos, imagens ou outros tipos de dados. Você pode personalizar o filtro de arquivos exibidos na caixa de diálogo e definir o diretório inicial.
+```csharp
+private void btnFire_Click(object sender, RoutedEventArgs e) {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*| CS Source Files | *.cs";
+        //openFileDialog.InitialDirectory = "C:\";
+        openFileDialog.Title = "Select a file";
+        //openFileDialog.Multiselect = true;
+
+        bool? sucess = openFileDialog.ShowDialog();
+        if (sucess == true) {
+            string path = openFileDialog.FileName;
+            string fileName = openFileDialog.SafeFileName;
+            //string[] paths = openFileDialog.FileNames;
+            //string[] fileNames = openFileDialog.SafeFileNames;
+
+            MessageBox.Show($"You selected: {path}");
+            tbInfo.Text = fileName;
+        } else {
+            MessageBox.Show("No file selected");
+        }
+    }
+```

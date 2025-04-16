@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using Microsoft.Win32;
 using System.Windows;
 
 namespace WPFTutorial;
@@ -10,14 +9,23 @@ public partial class MainWindow : Window {
     }
 
     private void btnFire_Click(object sender, RoutedEventArgs e) {
-        //MessageBox.Show("Could not open file.","Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*| CS Source Files | *.cs";
+        //openFileDialog.InitialDirectory = "C:\";
+        openFileDialog.Title = "Select a file";
+        //openFileDialog.Multiselect = true;
 
-        MessageBoxResult result = MessageBox.Show("Do you agree?", "Agreement", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        bool? sucess = openFileDialog.ShowDialog();
+        if (sucess == true) {
+            string path = openFileDialog.FileName;
+            string fileName = openFileDialog.SafeFileName;
+            //string[] paths = openFileDialog.FileNames;
+            //string[] fileNames = openFileDialog.SafeFileNames;
 
-        if (result == MessageBoxResult.Yes) {
-            tbInfo.Text = "You agreed.";
+            MessageBox.Show($"You selected: {path}");
+            tbInfo.Text = fileName;
         } else {
-            tbInfo.Text = "You disagreed.";
+            MessageBox.Show("No file selected");
         }
     }
 }
