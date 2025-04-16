@@ -9,13 +9,11 @@
    <Grid>  
        <Grid.RowDefinitions>  
            <RowDefinition/>  
-           <RowDefinition/>  
-           <RowDefinition/>   
+           <RowDefinition/>    
        </Grid.RowDefinitions>
 
-        <TextBox Name="txtInput" VerticalContentAlignment="Center" Width="250" Height="40" FontSize="16" Text="{Binding BoundText, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Grid.Row="1" Name="btnSet" Content="Set" Width="100" Height="40" Click="btnSet_Click"/>
-        <TextBlock Grid.Row="2" Name="txtResult" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Text="{Binding BoundText}"/>
+        <Button Name="btnFire" Content="Fire" Width="100" Height="40" Click="btnFire_Click"/>
+        <TextBlock Grid.Row="1" Name="tbInfo" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
     </Grid>  
 </Window>

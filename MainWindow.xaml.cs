@@ -4,31 +4,20 @@ using System.Windows;
 
 namespace WPFTutorial;
 
-public partial class MainWindow : Window, INotifyPropertyChanged {
+public partial class MainWindow : Window {
     public MainWindow() {
-        DataContext = this;
         InitializeComponent();
     }
 
-    private string boundText;
+    private void btnFire_Click(object sender, RoutedEventArgs e) {
+        //MessageBox.Show("Could not open file.","Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+        MessageBoxResult result = MessageBox.Show("Do you agree?", "Agreement", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-    public string BoundText {
-        get { return boundText; }
-        set {
-            boundText = value;
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BoundText"));
-            //OnPropertyChanged(nameof(BoundText));
-            OnPropertyChanged();
+        if (result == MessageBoxResult.Yes) {
+            tbInfo.Text = "You agreed.";
+        } else {
+            tbInfo.Text = "You disagreed.";
         }
-    }
-
-    private void btnSet_Click(object sender, RoutedEventArgs e) {
-        BoundText = "Hello, World!";
-    }
-
-    private void OnPropertyChanged([CallerMemberName]string propertyName = null) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

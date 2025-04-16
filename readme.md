@@ -194,3 +194,38 @@ Depois basta colocar a tag do UserControl no local desejado.
 ```
 
 <img src="images/UserControls.png" alt="UserControl" width="400"/>
+
+### Message Box
+O MessageBox é uma janela de diálogo que exibe uma mensagem para o usuário e pode conter botões para interação. Ele é útil para exibir informações, avisos ou erros. Você pode personalizar o título, o texto e os botões exibidos na caixa de mensagem.
+
+```csharp
+private void btnFire_Click(object sender, RoutedEventArgs e) {
+        MessageBox.Show("Button Clicket");
+        //MessageBox.Show("Could not open file.","Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+```
+<img src="images/MessageBox.png" alt="MessageBox" width="200"/>
+
+#### Customizando o MessageBox
+Você pode personalizar o MessageBox para exibir diferentes botões e ícones. Os botões disponíveis incluem `OK`, `Cancel`, `Yes`, `No` e combinações deles. Você também pode definir o ícone exibido na caixa de mensagem, como `Information`, `Warning` ou `Error`.
+```csharp
+private void btnFire_Click(object sender, RoutedEventArgs e) {
+        MessageBox.Show("Could not open file.","Error", MessageBoxButton.OK, MessageBoxImage.Error);
+}
+```
+<img src="images/MessageBox2.png" alt="MessageBox2" width="200"/>
+
+```csharp
+private void btnFire_Click(object sender, RoutedEventArgs e) {
+        //MessageBox.Show("Could not open file.","Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        MessageBoxResult result = MessageBox.Show("Do you agree?", "Agreement", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+        if (result == MessageBoxResult.Yes) {
+            tbInfo.Text = "You agreed.";
+        } else {
+            tbInfo.Text = "You disagreed.";
+        }
+}
+```
+<img src="images/MessageBox3.png" alt="MessageBox3" width="200"/>
