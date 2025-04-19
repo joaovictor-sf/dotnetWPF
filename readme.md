@@ -254,3 +254,154 @@ private void btnFire_Click(object sender, RoutedEventArgs e) {
         }
     }
 ```
+
+### ListView
+O ListView é um controle que exibe uma lista de itens, permitindo que o usuário selecione um ou mais itens. Ele é útil para exibir dados em formato de lista, como contatos, arquivos ou qualquer outra coleção de objetos. O ListView pode ser personalizado para exibir diferentes tipos de dados e pode incluir colunas, ícones e outros elementos visuais.
+
+*XAML*
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"  
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+       xmlns:local="clr-namespace:WPFTutorial"  
+       mc:Ignorable="d"  
+       Title="MainWindow" Height="400" Width="400">  
+   <Grid>  
+       <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Name="txtEntry" Height="35" FontSize="16"/>
+        <Button Grid.Column="1" Name="btnAdd" Content="Add" Height="35" Width="50" Click="btnAdd_Click" HorizontalAlignment="Left"/>
+        <Button Grid.Column="1" Name="btnDelete" Content="Delete" Height="35" Width="50" HorizontalAlignment="Center" Click="btnDelete_Click"/>
+        <Button Grid.Column="1" Name="btnClear" Content="Clear" Height="35" Width="50" HorizontalAlignment="Right" Click="btnClear_Click"/>
+
+        <ListView Name="lvEntreis" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single"/>
+
+    </Grid>  
+</Window>
+```
+
+*CS*
+
+```csharp
+using System.Windows;
+using System.Windows.Controls;
+
+namespace WPFTutorial;
+
+public partial class MainWindow : Window {
+    public MainWindow() {
+        InitializeComponent();
+
+        // Default list for testing
+        lvEntreis.Items.Add(new ListViewItem()
+        {
+            Content = new TextBlock()
+            {
+                Text = "Test 1",
+                FontSize = 20
+            }
+        });
+        lvEntreis.Items.Add(new ListViewItem()
+        {
+            Content = new TextBlock()
+            {
+                Text = "Test 2",
+                FontSize = 20
+            }
+        });
+        lvEntreis.Items.Add(new ListViewItem()
+        {
+            Content = new TextBlock()
+            {
+                Text = "Test 3",
+                FontSize = 20
+            }
+        });
+        lvEntreis.Items.Add(new ListViewItem()
+        {
+            Content = new TextBlock()
+            {
+                Text = "Test 4",
+                FontSize = 20
+            }
+        });
+        lvEntreis.Items.Add(new ListViewItem()
+        {
+            Content = new TextBlock()
+            {
+                Text = "Test 5",
+                FontSize = 20
+            }
+        });
+    }
+
+    private void btnAdd_Click(object sender, RoutedEventArgs e) {
+        if (string.IsNullOrWhiteSpace(txtEntry.Text)) {
+            return;
+        }
+        lvEntreis.Items.Add(new ListViewItem()
+        {
+            Content = new TextBlock()
+            {
+                Text = txtEntry.Text,
+                FontSize = 20
+            }
+        });
+        txtEntry.Clear();
+    }
+
+    private void btnDelete_Click(object sender, RoutedEventArgs e) {
+       //Erro
+        /*var items = lvEntreis.SelectedItem; ;
+
+        if (items != null) {
+            var selectedItems = lvEntreis.SelectedItems.Cast<ListViewItem>().ToList();
+            foreach (var item in selectedItems) {
+                lvEntreis.Items.Remove(item);
+            }
+        }*/
+
+        object selectedItem = lvEntreis.SelectedItem;
+
+        if (selectedItem != null) {
+            lvEntreis.Items.Remove(selectedItem);
+        }
+
+
+        // Whats is better?
+        /*
+         int index = lvEntreis.SelectedIndex;
+            if (index != -1) {
+                lvEntreis.Items.RemoveAt(index);
+            }
+         */
+        // Or this?
+        /*if (lvEntreis.SelectedItem != null) {
+            lvEntreis.Items.Remove(lvEntreis.SelectedItem);
+        }*/
+        // Or this?
+        /*
+        object selectedItem = lvEntreis.SelectedItem;
+        if (selectedItem != null) {
+            lvEntreis.Items.Remove(selectedItem);
+        }*/
+        // Answer: The first one is better because it uses the index to remove the item, which is more efficient than searching for the item in the list. The second and third options are less efficient because they require searching for the item in the list, which can be slower if the list is large.
+    }
+
+    private void btnClear_Click(object sender, RoutedEventArgs e) {
+        lvEntreis.Items.Clear();
+    }
+}
+```
+
+<img src="images/ListView.png" alt="ListView" width="400"/>

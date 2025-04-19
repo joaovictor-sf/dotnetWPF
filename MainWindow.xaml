@@ -5,15 +5,24 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
        xmlns:local="clr-namespace:WPFTutorial"  
        mc:Ignorable="d"  
-       Title="MainWindow" Height="250" Width="600">  
+       Title="MainWindow" Height="400" Width="400">  
    <Grid>  
-       <Grid.RowDefinitions>  
-           <RowDefinition/>  
-           <RowDefinition/>    
-       </Grid.RowDefinitions>
+       <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <Button Name="btnFire" Content="Fire" Width="100" Height="40" Click="btnFire_Click"/>
-        <TextBlock Grid.Row="1" Name="tbInfo" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Name="txtEntry" Height="35" FontSize="16"/>
+        <Button Grid.Column="1" Name="btnAdd" Content="Add" Height="35" Width="50" Click="btnAdd_Click" HorizontalAlignment="Left"/>
+        <Button Grid.Column="1" Name="btnDelete" Content="Delete" Height="35" Width="50" HorizontalAlignment="Center" Click="btnDelete_Click"/>
+        <Button Grid.Column="1" Name="btnClear" Content="Clear" Height="35" Width="50" HorizontalAlignment="Right" Click="btnClear_Click"/>
+
+        <ListView Name="lvEntreis" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single"/>
 
     </Grid>  
 </Window>
