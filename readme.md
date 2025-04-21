@@ -553,3 +553,51 @@ O StackPanel é um contêiner que organiza os controles em uma única linha ou c
 </Window>
 ```
 <img src="images/StackPanel.png" alt="StackPanel" width="400"/>
+
+### GridSplitter
+O GridSplitter é um controle que permite ao usuário redimensionar linhas e colunas em um Grid. Ele é útil para criar layouts flexíveis onde o usuário pode ajustar o tamanho dos controles conforme necessário. O GridSplitter pode ser arrastado para aumentar ou diminuir o tamanho das linhas ou colunas adjacentes.
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"  
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+       xmlns:local="clr-namespace:WPFTutorial"  
+       mc:Ignorable="d"  
+       Title="MainWindow" Height="400" Width="400">  
+   <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Fill="Red"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="Green" Grid.Column="0"/>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+            <Rectangle Fill="Yellow" Grid.Column="2"/>
+            <GridSplitter Grid.Column="3" HorizontalAlignment="Stretch"/>
+            <Rectangle Fill="Green" Grid.Column="4"/>
+        </Grid>
+
+        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch"/>
+
+        <Rectangle Fill="Blue" Grid.Row="3"/>
+
+    </Grid>  
+</Window>
+```
+<img src="images/GridSplitter.png" alt="GridSplitter" width="400"/>
+
+<img src="images/GridSplitter2.png" alt="GridSplitter" width="400"/>
+
