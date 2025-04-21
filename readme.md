@@ -405,3 +405,151 @@ public partial class MainWindow : Window {
 ```
 
 <img src="images/ListView.png" alt="ListView" width="400"/>
+
+#### ListViewItem
+O ListViewItem é um item individual dentro de um ListView. Ele pode conter texto, imagens ou outros controles. Você pode personalizar a aparência do ListViewItem usando estilos e templates. O ListViewItem também pode ser selecionado, permitindo que o usuário interaja com ele.
+```csharp
+private void btnAdd_Click(object sender, RoutedEventArgs e) {
+        if (string.IsNullOrWhiteSpace(txtEntry.Text)) {
+            return;
+        }
+        lvEntreis.Items.Add(new ListViewItem()
+        {
+            Content = new TextBlock()
+            {
+                Text = txtEntry.Text,
+                FontSize = 20
+            }
+        });
+        txtEntry.Clear();
+    }
+```
+
+#### ObservableCollection
+A ObservableCollection é uma coleção que notifica a interface do usuário quando itens são adicionados, removidos ou alterados. Isso é útil para manter a interface do usuário sincronizada com os dados subjacentes. Quando você usa uma ObservableCollection como fonte de dados para um ListView, a interface do usuário é atualizada automaticamente quando os dados mudam.
+A ObservableCollection é uma classe que implementa a interface INotifyCollectionChanged, o que significa que ela pode notificar a interface do usuário quando os itens são alterados. Isso é útil para manter a interface do usuário sincronizada com os dados subjacentes. Quando você usa uma ObservableCollection como fonte de dados para um ListView, a interface do usuário é atualizada automaticamente quando os dados mudam.
+
+*CS*
+```csharp
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace WPFTutorial;
+
+public partial class MainWindow : Window {
+    public MainWindow() {
+        DataContext = this;
+        entries = new ObservableCollection<string> {
+            "Entry 1",
+            "Entry 2",
+            "Entry 3"
+        };
+
+        InitializeComponent();
+    }
+
+    private ObservableCollection<string> entries;
+
+    public ObservableCollection<string> Entries {
+        get { return entries; }
+        set { entries = value; }
+    }
+
+
+    private void btnAdd_Click(object sender, RoutedEventArgs e) {
+        if (!string.IsNullOrWhiteSpace(txtEntry.Text)) {
+            entries.Add(txtEntry.Text);
+            txtEntry.Clear();
+        }
+    }
+
+    private void btnDelete_Click(object sender, RoutedEventArgs e) {
+        if (lvEntreis.SelectedItem != null) {
+            entries.Remove(lvEntreis.SelectedItem.ToString());
+        }
+    }
+
+    private void btnClear_Click(object sender, RoutedEventArgs e) {
+        entries.Clear();
+    }
+}
+```
+*Xaml*
+
+```xaml
+<ListView Name="lvEntreis" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Entries}"/>
+```
+### Data Binding
+O Data Binding é um recurso poderoso do WPF que permite vincular propriedades de controles de interface do usuário a propriedades de objetos de dados. Isso facilita a atualização automática da interface do usuário quando os dados mudam e vice-versa. O Data Binding é amplamente utilizado em aplicações WPF para criar interfaces dinâmicas e responsivas.
+
+#### Binding
+O Binding é o processo de vincular uma propriedade de um controle a uma propriedade de um objeto de dados. Isso permite que você exiba e edite dados na interface do usuário sem precisar escrever muito código. O WPF suporta vários tipos de binding, incluindo OneWay, TwoWay e OneTime.
+```xaml
+<TextBox Name="txtEntry" Height="35" FontSize="16" Text="{Binding Path=Text, ElementName=tbInfo, Mode=TwoWay}"/>
+```
+```csharp
+private void btnFire_Click(object sender, RoutedEventArgs e) {
+        tbInfo.Text = txtEntry.Text;
+    }
+```
+
+```csharp
+private void btnFire_Click(object sender, RoutedEventArgs e) {
+        tbInfo.Text = txtEntry.Text;
+        txtEntry.Clear();
+    }
+```
+
+### StackPanel
+O StackPanel é um contêiner que organiza os controles em uma única linha ou coluna. Ele é útil para criar layouts simples e flexíveis. Você pode definir a orientação do StackPanel como horizontal ou vertical, dependendo de como deseja organizar os controles.
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"  
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+       xmlns:local="clr-namespace:WPFTutorial"  
+       mc:Ignorable="d"  
+       Title="MainWindow" Height="400" Width="400">  
+   <Grid>  
+       <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="100" Height="30" Margin="2" Content="Button 1"/>
+            <Button Width="100" Height="30" Margin="2" Content="Button 2"/>
+            <Button Width="100" Height="30" Margin="2" Content="Button 3"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Label:"/>
+                <TextBox Width="150"/>
+                <Button Content="GO"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Label:"/>
+                <TextBox Width="150"/>
+                <Button Content="GO"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Label:"/>
+                <TextBox Width="150"/>
+                <Button Content="GO"/>
+            </StackPanel>
+
+            <TextBox Width="150" Height="30" Margin="2"/>
+            <ComboBox Width="150" Height="30" Margin="2"/>
+            <TextBox Width="150" Height="30" Margin="2"/>
+            <TextBox Width="150" Height="30" Margin="2"/>
+            <TextBox Width="150" Height="30" Margin="2"/>
+            <TextBox Width="150" Height="30" Margin="2"/>
+        </StackPanel>
+
+    </Grid>  
+</Window>
+```
+<img src="images/StackPanel.png" alt="StackPanel" width="400"/>
