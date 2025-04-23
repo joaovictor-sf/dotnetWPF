@@ -7,33 +7,22 @@
        mc:Ignorable="d"  
        Title="MainWindow" Height="400" Width="400">  
    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="10"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+       
+        <StackPanel>
+            <TextBlock Text="Name" FontSize="16"/>
+            <Expander Header="More Details">
+                <TextBlock Text="Description" FontSize="16"/>
+            </Expander>
+            <Button x:Name="btnDetails" Content="Details" Width="100" Height="30" Margin="5" Click="btnDetails_Click"/>
+        </StackPanel>
 
-        <Rectangle Fill="Red"/>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Rectangle Fill="Green" Grid.Column="0"/>
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
-            <Rectangle Fill="Yellow" Grid.Column="2"/>
-            <GridSplitter Grid.Column="3" HorizontalAlignment="Stretch"/>
-            <Rectangle Fill="Green" Grid.Column="4"/>
-        </Grid>
-
-        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch"/>
-
-        <Rectangle Fill="Blue" Grid.Row="3"/>
+        <Expander Name="ExpanderDetails" Grid.Column="1" ExpandDirection="Left" Background="DarkGray" BorderThickness="0">
+            <Rectangle Fill="DarkGray" Width="125"/>
+        </Expander>
 
     </Grid>  
 </Window>

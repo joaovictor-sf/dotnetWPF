@@ -601,3 +601,32 @@ O GridSplitter é um controle que permite ao usuário redimensionar linhas e col
 
 <img src="images/GridSplitter2.png" alt="GridSplitter" width="400"/>
 
+### Expander
+O Expander é um controle que permite expandir ou recolher conteúdo adicional. Ele é útil para ocultar ou mostrar informações extras, como detalhes ou opções adicionais. O Expander pode conter qualquer tipo de controle, como TextBlock, StackPanel ou outros controles.
+```xaml
+<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+       
+        <StackPanel>
+            <TextBlock Text="Name" FontSize="16"/>
+            <Expander Header="More Details">
+                <TextBlock Text="Description" FontSize="16"/>
+            </Expander>
+            <Button x:Name="btnDetails" Content="Details" Width="100" Height="30" Margin="5" Click="btnDetails_Click"/>
+        </StackPanel>
+
+        <Expander Name="ExpanderDetails" Grid.Column="1" ExpandDirection="Left" Background="DarkGray" BorderThickness="0">
+            <Rectangle Fill="DarkGray" Width="125"/>
+        </Expander>
+
+</Grid>
+```
+
+<img src="images/Expander.png" alt="Expander" width="400"/>
+
+<img src="images/Expander2.png" alt="Expander2" width="400"/>
+
+###

@@ -7,4 +7,7 @@ public partial class MainWindow : Window {
         InitializeComponent();
     }
 
+    private void btnDetails_Click(object sender, RoutedEventArgs e) {
+        ExpanderDetails.IsExpanded = !ExpanderDetails.IsExpanded;
+    }
 }
