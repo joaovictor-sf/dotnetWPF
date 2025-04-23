@@ -5,24 +5,17 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
        xmlns:local="clr-namespace:WPFTutorial"  
        mc:Ignorable="d"  
-       Title="MainWindow" Height="400" Width="400">  
+       Title="MainWindow" Height="350" Width="300">  
    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-       
-        <StackPanel>
-            <TextBlock Text="Name" FontSize="16"/>
-            <Expander Header="More Details">
-                <TextBlock Text="Description" FontSize="16"/>
-            </Expander>
-            <Button x:Name="btnDetails" Content="Details" Width="100" Height="30" Margin="5" Click="btnDetails_Click"/>
-        </StackPanel>
-
-        <Expander Name="ExpanderDetails" Grid.Column="1" ExpandDirection="Left" Background="DarkGray" BorderThickness="0">
-            <Rectangle Fill="DarkGray" Width="125"/>
-        </Expander>
-
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>  
 </Window>

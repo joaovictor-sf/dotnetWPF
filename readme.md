@@ -629,4 +629,30 @@ O Expander é um controle que permite expandir ou recolher conteúdo adicional. 
 
 <img src="images/Expander2.png" alt="Expander2" width="400"/>
 
-###
+### ScrollViewer
+O ScrollViewer é um controle que permite rolar o conteúdo quando ele excede o tamanho visível. Ele é útil para exibir grandes quantidades de dados ou conteúdo que não cabem na tela. O ScrollViewer pode conter qualquer tipo de controle e pode ser configurado para rolar horizontalmente, verticalmente ou em ambas as direções.
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"  
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+       xmlns:local="clr-namespace:WPFTutorial"  
+       mc:Ignorable="d"  
+       Title="MainWindow" Height="350" Width="300">  
+   <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+                <TextBox Width="200" Height="30" Margin="10" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>  
+</Window>
+```
+<img src="images/ScrollViewer.png" alt="ScrollViewer" width="400"/>
+<img src="images/ScrollViewer2.png" alt="ScrollViewer2" width="400"/>
