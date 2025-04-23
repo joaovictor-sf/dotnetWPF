@@ -717,3 +717,121 @@ public partial class MainWindow : Window {
 }
 ```
 <img src="images/CustomWindow.png" alt="CustomWindow" width="400"/>
+
+### Open new Window
+O WPF permite abrir novas janelas a partir de uma janela existente. Isso é útil para criar diálogos, configurações ou qualquer outra funcionalidade que exija uma nova janela. Você pode criar uma nova classe de janela e instanciá-la quando necessário.
+
+*Main Window*
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"  
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+       xmlns:local="clr-namespace:WPFTutorial"  
+       mc:Ignorable="d"  
+       Title="MainWindow" Height="300" Width="300">
+    <Grid>
+
+        <StackPanel>
+            <Button Name="btnNormal" Width="100" Height="40" Content="Normal" Margin="5" Click="btnNormal_Click"/>
+            <Button Name="btnModal" Width="100" Height="40" Content="Modal" Margin="5" Click="btnModal_Click"/>
+            <TextBox Name="txtInput" Width="200" Height="40" FontSize="20"/>
+        </StackPanel>
+    </Grid>  
+</Window>
+```
+```csharp
+using System.Windows;
+using WPFTutorial.View.Windows;
+
+namespace WPFTutorial;
+
+public partial class MainWindow : Window {
+    public MainWindow() {
+        InitializeComponent();
+    }
+
+    private void btnNormal_Click(object sender, RoutedEventArgs e) {
+        NormalWindow normalWindow = new NormalWindow();
+        normalWindow.Show(); // Abre uma nova janela normal(não modal), ou seja, a janela atual não fica bloqueada. Se a janela atual for fechada, a nova janela ainda estará aberta.
+    }
+
+    private void btnModal_Click(object sender, RoutedEventArgs e) {
+        ModalWindow modalWindow = new ModalWindow(this);
+        Opacity = 0.5;
+        modalWindow.ShowDialog(); // Abre uma nova janela modal, em outras palavras, a janela atual fica bloqueada até que a janela modal seja fechada
+        Opacity = 1;
+
+        if (modalWindow.Success) {
+            txtInput.Text = modalWindow.Input;
+        }
+    }
+}
+```
+
+<img src="images/MainWindow.png" alt="MainWindow" width="400"/>
+
+*Modal Window*
+
+```xaml
+<Window x:Class="WPFTutorial.View.Windows.ModalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTutorial.View.Windows"
+        mc:Ignorable="d"
+        Title="ModalWindow" Height="150" Width="250" WindowStyle="None" WindowStartupLocation="CenterOwner">
+    <Grid>
+
+        <StackPanel VerticalAlignment="Center">
+            <TextBox x:Name="txtIput" Width="200" Height="40" Margin="5" TextChanged="txtIput_TextChanged"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnOK" Width="40" Height="30" Content="OK" Margin="5" Click="btnOK_Click" IsEnabled="False"/>
+                <Button x:Name="btnCancel" Width="80" Height="30" Content="Cancel" Margin="5" Click="btnCancel_Click"/>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Window>
+```
+
+```csharp
+using System.Windows;
+
+namespace WPFTutorial.View.Windows
+{
+    public partial class ModalWindow : Window
+    {
+        public bool Success { get; set; }
+        public string Input { get; set; }
+
+        public ModalWindow(Window parentalWindow)
+        {
+            Owner = parentalWindow;
+            InitializeComponent();
+        }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e) {
+            Success = true;
+            Input = txtIput.Text;
+            Close();
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e) {
+            Close();
+        }
+
+        private void txtIput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) {
+            if(!string.IsNullOrEmpty(txtIput.Text)) {
+                btnOK.IsEnabled = true;
+            } else {
+                btnOK.IsEnabled = false;
+            }
+        }
+    }
+}
+```
+
+<img src="images/ModalWindow.png" alt="ModalWindow" width="400"/>
