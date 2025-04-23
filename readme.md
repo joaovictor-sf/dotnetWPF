@@ -656,3 +656,64 @@ O ScrollViewer é um controle que permite rolar o conteúdo quando ele excede o 
 ```
 <img src="images/ScrollViewer.png" alt="ScrollViewer" width="400"/>
 <img src="images/ScrollViewer2.png" alt="ScrollViewer2" width="400"/>
+
+### Custom Window and Title Bar
+O WPF permite criar janelas personalizadas e barras de título. Você pode remover a barra de título padrão e criar sua própria barra de título com botões personalizados, como minimizar, maximizar e fechar. Isso permite que você crie uma interface de usuário mais atraente e adaptada às necessidades da sua aplicação.
+```xaml
+<Window x:Class="WPFTutorial.MainWindow"  
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+       xmlns:local="clr-namespace:WPFTutorial" Background="DarkGray"  
+       mc:Ignorable="d"  
+       Title="MainWindow" Height="300" Width="300" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CaptionHeight="0" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnMimimize" Content="🗕" Width="40" BorderBrush="Transparent" Background="Transparent" Click="btnMimimize_Click"/>
+            <Button x:Name="btnMaximize" Content="🗖" Width="40" BorderBrush="Transparent" Background="Transparent" Click="btnMaximize_Click"/>
+            <Button x:Name="btnClose" Content="X" Width="40" BorderBrush="Transparent" Background="Transparent" Click="btnClose_Click"/>
+        </StackPanel>
+    </Grid>  
+</Window>
+```
+```csharp
+using System.Windows;
+
+namespace WPFTutorial;
+
+public partial class MainWindow : Window {
+    public MainWindow() {
+        InitializeComponent();
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+        DragMove();
+    }
+
+    private void btnMimimize_Click(object sender, RoutedEventArgs e) {
+        WindowState = WindowState.Minimized;
+    }
+
+    private void btnMaximize_Click(object sender, RoutedEventArgs e) {
+        if(WindowState == WindowState.Maximized) {
+            WindowState = WindowState.Normal;
+        } else {
+            WindowState = WindowState.Maximized;
+        }
+    }
+
+    private void btnClose_Click(object sender, RoutedEventArgs e) {
+        Close();
+    }
+}
+```
+<img src="images/CustomWindow.png" alt="CustomWindow" width="400"/>
